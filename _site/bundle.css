@@ -13,6 +13,10 @@ body {
     font-family: var(--main-font);
 }
 
+main {
+    min-height: calc(100vh - 11em);
+}
+
 header nav ul {
     display: flex;
     gap: 1em;
@@ -33,7 +37,9 @@ header nav ul {
 }
 
 img {
-    width: 15em;
+    width: 30em;
+    height: auto;
+    object-fit: contain;
 }
 
 .hero {
