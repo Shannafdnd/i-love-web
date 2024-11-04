@@ -1,5 +1,5 @@
 ---
-layout: layout.html
+layout: layout_journal.html
 title: Learning Journal sprint 13
 ---
 
