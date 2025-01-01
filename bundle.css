@@ -1,52 +1,87 @@
 :root {
-    --background-color: #eae6da;
-    --button-color: #382004;
-    --text-color: #920904;
-    --second-color: #C6A683;
-    --main-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
-    --border: 1px solid var(--button-color);
+    --background-color: #e2cdb8;
+    --nav-background-color: #381604;
+    --nav-text-color: #eae6da;
+    --shadow-color: #920904;
+    --second-color: #c09776;
+    --text-color: #000000;
+    --main-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --border: 1px solid var(--nav-background-color);
     --border-radius: 20px;
+}
+
+body.evening {
+    --background-color: #3c2a19;
+    --nav-background-color: #802405;
+    --shadow-color: #802405;
+    --text-color: #eae6da;
+    --border: 1px solid var(--text-color);
+}
+
+body.midnight {
+    --background-color: #151515;
+    --nav-background-color: #5c0604;
+    --shadow-color: #5c0604;
+    --text-color: #C6A683;
+    --nav-text-color: #C6A683;
+    --border: 1px solid var(--text-color);
 }
 
 body {
     background-color: var(--background-color);
     font-family: var(--main-font);
+    color: var(--text-color);
 }
 
 main {
-    min-height: calc(100vh - 11em);
+    min-height: calc(100vh - 195px);
     margin-top: 5em;
 }
 
+#toggle-nav {
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+}
 
-
-header nav ul {
-    display: flex;
-    gap: 1em;
-    justify-content: end;    
-    list-style-type: none;
-    padding: 0;
-    background-color: var(--button-color);
-    border-radius: var(--border-radius);
+header {
     position: fixed;
     top: 0;
-    width: calc(100vw - 30px);
+    left: 0;
+    width: 100vw;
 
-    a {
-        text-decoration: unset;
-        color: var(--background-color);
-        background-color: var(--button-color);
-        padding: 10px;
-        border-radius: 10px;
-        border: 3px solid var(--background-color);
+    padding: 6px 0;
+
+    background-color: var(--nav-background-color);
+    color: var(--nav-text-color);
+
+    nav ul {
+        display: none;
+
+        list-style-type: none;
+        padding: 0;
+        padding-bottom: 50px;
+
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 20vh;
+
+        a {
+            color: inherit;
+        }
     }
 }
 
-img {
-    max-width: 50em;
-    width: 100vw;
-    height: auto;
-    object-fit: contain;
+header.open nav ul {
+    display: flex;
+}
+
+#try-themes {
+    position: fixed;
+    right: 27em;
+    top: 47px;
+    display: none;
 }
 
 .hero {
@@ -57,19 +92,26 @@ img {
     gap: 1em;
     border-bottom: var(--border);
     color: var(--second-color);
-    text-shadow:10px 10px 0px var(--text-color);
+    text-shadow:10px 10px 0px var(--shadow-color);
     border-radius: var(--border-radius);
     border-bottom: var(--border);
     border-top: var(--border);
     background-color: var(--background-color);
 
     h1 {
-        font-size: min(15em, 20vw);
+        font-size: min(10em, 20vw);
         margin: 3rem 0;
         line-height: 0.8;
         width: min-content;
         background-color: var(--background-color);
         border-radius: var(--border-radius);
+    }
+
+    img {
+        max-width: 50em;
+        width: 100vw;
+        height: auto;
+        object-fit: contain;
     }
 }
 
@@ -82,18 +124,77 @@ article {
 }
 
 footer {
-    background-color: var(--button-color);
+    background-color: var(--nav-background-color);
     padding: 10px;
     border-radius: 10px;
 
     a {
         text-decoration: unset;
-        color: var(--background-color);
+        color: var(--nav-text-color);
+    }
+}
+
+a {
+    color: var(--text-color);
+}
+
+@media only screen and (min-width: 500px) {
+    #toggle-nav {
+        display: none;
+    }
+
+    #try-themes {
+        display: flex;
+    }
+
+    header {
+        background-color: unset;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: row;
+        height: unset;
+        gap: 1em;
+        justify-content: end;
+        list-style-type: none;
+        padding: 0;
+        background-color: var(--nav-background-color);
+        border-radius: var(--border-radius);
+        position: fixed;
+        top: 0;
+        left: 10px;
+        width: calc(100vw - 30px);
+        z-index: 2;
+    
+        a, select {
+            color: var(--nav-text-color);
+            background-color: var(--nav-background-color);
+            padding: 10px;
+            border-radius: 10px;
+            border: 3px solid var(--background-color);
+        }
+    
+        a {
+            text-decoration: unset;
+        }
+    
+        select {
+            margin: -11px 0;
+        }
     }
 }
 
 @media only screen and (min-width: 1300px) {
     .hero {
         flex-direction: row;
+
+        h1 {
+            font-size: 10vw;
+        }
+
+        img {
+            width: 50vw;
+        }
     }
 }

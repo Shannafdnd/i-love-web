@@ -1,6 +1,9 @@
 ---
-layout: layout_journal.html
+layout: layout.html
 title: Learning Journal sprint 13
+stylesheet:
+ - /journal.css
+ - https://unpkg.com/prismjs@1.20.0/themes/prism-twilight.css
 ---
 
 [volgende](../sprint14)

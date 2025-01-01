@@ -5,16 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/bundle.css">
+    {%- for stylesheet in stylesheets -%}
+        <link rel="stylesheet" href="{{stylesheet}}">
+    {%- endfor -%}
+    <script type="module">
+        const themePicker = document.getElementById("theme-picker");
+        const tryThemes = document.getElementById("try-themes");
+        const toggleNav = document.getElementById("toggle-nav");
+        const header = document.getElementById("header");
+        
+        const theme = localStorage.getItem("theme");
+        if (theme) {
+            document.body.className = theme;
+            themePicker.value = theme;
+            tryThemes.remove();
+        }
+
+        themePicker.addEventListener("change", () => {
+            document.body.className = themePicker.value;
+            localStorage.setItem("theme", themePicker.value);
+            tryThemes.remove();
+        })
+
+        toggleNav.addEventListener("click", () => {
+            header.classList.toggle("open");
+        })
+    </script>
 </head>
-<body>
-    <header>
+<body class="papyrus">
+    <header id="header">
+        <button id="toggle-nav">
+            <img src="/assets/hamburger-menu.svg" alt="menu" width="40" height="40">
+        </button>
         <nav>
             <ul>
+                <li>
+                    <select id="theme-picker">
+                        <option value="fall">Fall</option>
+                        <option value="evening">Evening</option>
+                        <option value="midnight">Midnight</option>
+                    </select>
+                </li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/Learning-Journal">Learning Journal</a></li>
                 <li><a href="/Projects">Projects</a></li>
             </ul>
         </nav>
+        <div id="try-themes">
+            <p>Also try other themes</p>
+            <img src="/assets/arrow.png" alt="arrow" width="30" height="30">
+        </div>
     </header>
     <main>
         {{ content }}

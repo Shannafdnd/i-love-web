@@ -1,6 +1,9 @@
 ---
-layout: layout_journal.html
+layout: layout.html
 title: Learning Journal sprint 14
+stylesheets:
+ - /journal.css
+ - https://unpkg.com/prismjs@1.20.0/themes/prism-twilight.css
 ---
 
 [vorige](../sprint13) [volgende](../sprint15)
@@ -53,8 +56,8 @@ In page.server.js gebruik je een
 ```js
 export async function load() {
 	return {
-		foo: 'whatever'
-		bar: '42'
+		foo: 'whatever',
+		bar: '42',
 		type: 'TOPG'
 	}
 }
@@ -66,8 +69,8 @@ PUBLIC_ betekent dat het niet beschermd is.
 ### DATA BINDING
 Framework projecten hebben een manier om data te binden. 
 
-``` js
-<schript>
+```js
+<script>
 	let name = 'world'
 <script>
 
