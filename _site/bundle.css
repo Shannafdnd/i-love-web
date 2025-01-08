@@ -8,6 +8,7 @@
     --main-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     --border: 1px solid var(--nav-background-color);
     --border-radius: 20px;
+    --transition-duration: 750ms;
 }
 
 body.evening {
@@ -36,12 +37,41 @@ body {
 main {
     min-height: calc(100vh - 195px);
     margin-top: 5em;
+    transition: margin-top var(--transition-duration);
+}
+
+header.open + main {
+    margin-top: calc(5em + 20vh + 50px);
 }
 
 #toggle-nav {
     background-color: unset;
     border: none;
     cursor: pointer;
+
+    svg {
+        path {
+            transition: transform var(--transition-duration), opacity var(--transition-duration);
+        }
+        path:nth-of-type(1) {
+            transform-origin: 1px 1px;
+        }
+        path:nth-of-type(3) {
+            transform-origin: 1px 13px;
+        }
+    }
+}
+
+header.open #toggle-nav svg {
+    path:nth-of-type(1) {
+        transform: rotate(45deg);
+    }
+    path:nth-of-type(2) {
+        opacity: 0;
+    }
+    path:nth-of-type(3) {
+        transform: rotate(-45deg);
+    }
 }
 
 header {
@@ -55,26 +85,39 @@ header {
     background-color: var(--nav-background-color);
     color: var(--nav-text-color);
 
-    nav ul {
-        display: none;
-
-        list-style-type: none;
-        padding: 0;
-        padding-bottom: 50px;
-
+    nav {
+        display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        height: 20vh;
+        justify-content: end;
+        height: 0;
+        transition: height var(--transition-duration);
+        
+        ul {
+            display: none;
 
-        a {
-            color: inherit;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            padding-bottom: 50px;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 20vh;
+
+            a {
+                color: inherit;
+            }
         }
     }
 }
 
-header.open nav ul {
-    display: flex;
+header.open nav {
+    height: calc(20vh + 50px);
+
+    ul {
+        display: flex;
+    }
 }
 
 #try-themes {
@@ -149,38 +192,41 @@ a {
 
     header {
         background-color: unset;
-    }
 
-    header nav ul {
-        display: flex;
-        flex-direction: row;
-        height: unset;
-        gap: 1em;
-        justify-content: end;
-        list-style-type: none;
-        padding: 0;
-        background-color: var(--nav-background-color);
-        border-radius: var(--border-radius);
-        position: fixed;
-        top: 0;
-        left: 10px;
-        width: calc(100vw - 30px);
-        z-index: 2;
-    
-        a, select {
-            color: var(--nav-text-color);
-            background-color: var(--nav-background-color);
-            padding: 10px;
-            border-radius: 10px;
-            border: 3px solid var(--background-color);
-        }
-    
-        a {
-            text-decoration: unset;
-        }
-    
-        select {
-            margin: -11px 0;
+        nav {
+            display: flex;
+            justify-content: center;
+
+            ul {
+                display: flex;
+                flex-direction: row;
+                height: unset;
+                gap: 1em;
+                justify-content: end;
+                list-style-type: none;
+                padding: 0;
+                margin-top: 2em;
+                background-color: var(--nav-background-color);
+                border-radius: var(--border-radius);
+                width: calc(100vw - 30px);
+                z-index: 2;
+
+                a, select {
+                    color: var(--nav-text-color);
+                    background-color: var(--nav-background-color);
+                    padding: 10px;
+                    border-radius: 10px;
+                    border: 3px solid var(--background-color);
+                }
+            
+                a {
+                    text-decoration: unset;
+                }
+            
+                select {
+                    margin: -11px 0;
+                }
+            }
         }
     }
 }
