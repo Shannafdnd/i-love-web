@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Journal sprint 14</title>
+    <link rel="stylesheet" href="/i-love-web/bundle.css"><link rel="stylesheet" href="/journal.css"><link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-twilight.css"><script type="module">
+        const themePicker = document.getElementById("theme-picker");
+        const tryThemes = document.getElementById("try-themes");
+        const toggleNav = document.getElementById("toggle-nav");
+        const header = document.getElementById("header");
+        
+        const theme = localStorage.getItem("theme");
+        if (theme) {
+            document.body.className = theme;
+            themePicker.value = theme;
+            tryThemes.remove();
+        }
+
+        themePicker.addEventListener("change", () => {
+            document.body.className = themePicker.value;
+            localStorage.setItem("theme", themePicker.value);
+            tryThemes.remove();
+        })
+
+        toggleNav.addEventListener("click", () => {
+            header.classList.toggle("open");
+        })
+    </script>
+</head>
+<body class="papyrus">
+    <header id="header">
+        <button id="toggle-nav">
+            <svg width="36" height="28" viewBox="0 0 18 14">
+                <path fill="#ffffff" d="M 1 0 h 16 a 1 1 0 0 1 0 2 h -16 a 1 1 0 0 1 0 -2 Z" />
+                <path fill="#ffffff" d="M 1 6 h 16 a 1 1 0 0 1 0 2 h -16 a 1 1 0 0 1 0 -2 Z" />
+                <path fill="#ffffff" d="M 1 12 h 16 a 1 1 0 0 1 0 2 h -16 a 1 1 0 0 1 0 -2 Z" />
+            </svg>
+            <!-- <img src="/assets/hamburger-menu.svg" alt="menu" width="40" height="40"> -->
+        </button>
+        <nav>
+            <ul>
+                <li>
+                    <select id="theme-picker">
+                        <option value="fall">Fall</option>
+                        <option value="evening">Evening</option>
+                        <option value="midnight">Midnight</option>
+                    </select>
+                </li>
+                <li><a href="/i-love-web/">Home</a></li>
+                <li><a href="/i-love-web/Learning-Journal">Learning Journal</a></li>
+                <li><a href="/i-love-web/Projects">Projects</a></li>
+            </ul>
+        </nav>
+        <div id="try-themes">
+            <p>Also try other themes</p>
+            <img src="/i-love-web/assets/arrow.png" alt="arrow" width="30" height="30">
+        </div>
+    </header>
+    <main>
+        <p><a href="../sprint13">vorige</a> <a href="../sprint15">volgende</a></p>
+<h1>Sprint 14</h1>
+<h2>Ma 30 sept</h2>
+<h3>CSS LAYOUTS</h3>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Floats</li>
+<li>https://web.dev/learn/css/layout/</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_mode</li>
+<li>https://css-tricks.com/snippets/css/complete-guide-grid/</li>
+<li>https://firefox-source-docs.mozilla.org/devtools-user/page_inspector/how_to/examine_flexbox_layouts/index.html</li>
+<li>https://developer.chrome.com/docs/devtools/css/grid</li>
+</ul>
+<p>Verschillende layouts:</p>
+<ul>
+<li>Flow</li>
+<li>Grid</li>
+<li>Mansonry</li>
+<li>Flexbox</li>
+<li>Float</li>
+<li>Positioned</li>
+<li>Multi-column</li>
+</ul>
+<p>Opdracht:
+https://github.com/fdnd-task/layout-in-css/blob/main/docs/INSTRUCTIONS.md</p>
+<h3>SVELTEKIT STRUCTUUR</h3>
+<ul>
+<li>In SRC:
+App.html is de schil van het project. In routes zitten je pagina's. In de lib/.server zit alleen maar server side code. Bijv het inlog systeem of waar de API key wordt gebruikt.</li>
+<li>In static staat alles waar sveltekit niks meer mee hoeft, zoals downloads en afbeeldingen.</li>
+<li>In .gitignore staat alles wat niet naar github mag. Zoals node modules en .env bestanden.</li>
+<li>.env mag niet naar github omdat er gevoelige data in staat. .env.example is hetzelfde maar dan zonder geheimen. Die stuur je wel naar github.</li>
+<li>In package.json staan al je packages. Dit heb je nodig voor sveltekit</li>
+<li>In svelte.config.js staat vastgelegd hoe svelte draait. Als je via vercel wilt moet je hierin een adapter aanpassen.</li>
+<li>vite.config.js is een build tool.</li>
+</ul>
+<p>Voordat je je site live zet, run eerst build.</p>
+<h3>ROUTING</h3>
+<p>Maak een sitemap om de routes te begrijpen</p>
+<h3>ERROR HANDLING</h3>
+<p>+error.svelte is 1 van de manieren om error handling te gebruiken. Als er dan iets mis gaat of als je naar een niet bestaande route gaat, krijg je geen 404 of 500 meer, maar je eigen custom error pagina. Je kan hier een layout in zetten. Je kan layouts nesten. In layout.svelte maak je een layout en die kan je inladen. De error.svelte is hetzelfde als een page.svelte.
+Met $page.error kun je de error message weergeven.</p>
+<p>Als svelte helemaal niet meer werkt gaat ie naar error.html.</p>
+<h3>LOADING DATA</h3>
+<p>In page.server.js gebruik je een</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token string">'whatever'</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token string">'42'</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'TOPG'</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Je moet export voor een functie zetten die je ergens anders wil inladen.</p>
+<p>PUBLIC_ betekent dat het niet beschermd is.</p>
+<h3>DATA BINDING</h3>
+<p>Framework projecten hebben een manier om data te binden.</p>
+<pre class="language-js"><code class="language-js"><span class="token operator">&lt;</span>script<span class="token operator">></span>
+	<span class="token keyword">let</span> name <span class="token operator">=</span> <span class="token string">'world'</span>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+
+<span class="token operator">&lt;</span>input bind<span class="token operator">:</span>value<span class="token operator">=</span><span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token operator">></span>
+
+<span class="token operator">&lt;</span>p<span class="token operator">></span>Hello <span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token operator">!</span><span class="token operator">&lt;</span>p<span class="token operator">></span> <span class="token comment">//dit geeft de output 'Hello world!'</span></code></pre>
+<p>Door let te vervangen door $: maak je het reactive.</p>
+<h3>Library</h3>
+<p>'$lib' is library.</p>
+<pre class="language-js"><code class="language-js"><span class="token operator">&lt;</span>script<span class="token operator">></span> 
+	<span class="token keyword">import</span> <span class="token punctuation">{</span>Header<span class="token punctuation">,</span> Nav<span class="token punctuation">,</span> Footer<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'$lib'</span>
+<span class="token operator">&lt;</span>script<span class="token operator">></span></code></pre>
+<h2>wo 2 okt Design critique</h2>
+<ul>
+<li>Dieter Rams, ten princibles for better design</li>
+<li>Less is more</li>
+<li>kan designkeuzes uitleggen</li>
+</ul>
+<h2>vrij 4 okt we love web</h2>
+<p>Lief Amsterdam
+lifeworld
+have natural animation easings
+loer architekten
+areas
+alcest
+think of aniamtion and interaction as an extention to an original intent
+be open minded
+ask yourself what it brings and ask for feedback
+be ready to spend a lot of time on it
+gsap accesibility</p>
+<h2>ma 7 okt</h2>
+<p>maak een simpele portfolio, we hebben geen les gehad in graphic design. zolang je maar iets hebt.</p>
+<p>signaleert knelpunten en dingen die beter kunnen in de samenwerking.
+Get agile is een boekje
+waterval vs agile
+heel veel werk systemen voor software development
+comprehensive system
+itererend werken
+agile development
+scrum
+minimum viable product: project met alle must haves
+optimum viable product: must haves, should haves en could haves af
+product owner: persoon in bedrijf die user stories maakt
+stand up: max een kwartier, doe je staand, vertel waar je bent en wat goed of fout gaat
+continuous integration: automatische intergratie
+scrum is goed voor onzekere dingen
+elke werkdag een checkout waarbij je je learning journal bijhoud.
+een agile team kan eventuele problemen oplossen omdat er nodige expertise in het team zit.</p>
+<p>CHECKOUT:
+We hebben geleerd hoe scrum werkt en wat rollen zijn binnen een team, en hoe we dit zelf kunnen gebruiken. We hebben besproken dat in dit groepje Ruben de rol als scrum master het meest speelt. We hebben een planning gemaakt voor een standup en een checkout. Rond 1 uur een standup en rond 4 uur een checkout. In een checkout schrijf je kort op wat je die dag hebt geleerd en besproken, zodat je de volgende dag dit er weer bij kan pakken en gelijk door kan gaan. We hebben ook het project board wat opgeschoond en de laatste taken verdeeld.</p>
+<h2>Wo 9 okt</h2>
+<p>Je hoeft geen database te gebruiken voor de i love web pagina, je kan gewoon je data opslaan in de site zelf op github, in een json bestand.</p>
+<p>Changelog in je readme
+Tests
+Linter voor code zoals prettier
+Vragen wat de klant wil</p>
+<p>leervraag: zelf omarmen van nieuwe technologie</p>
+<p>stappenplan maken voor problemen</p>
+<ul>
+<li>eerst documentatie</li>
+<li>googlen</li>
+<li>klasgenoot</li>
+<li>docent</li>
+</ul>
+<h2>do 10 okt</h2>
+<p>FEEDBACK SPRINT REVIEW</p>
+<ul>
+<li>achtergrond kleur gebaseerd op de foto</li>
+<li>utility buttons sticky</li>
+<li>header sticky maar zonder rubrieken en zwarte balk</li>
+<li>schaduwen passen niet in het red pers plaatje</li>
+<li>spelen met witruimte</li>
+<li>hoekig design</li>
+<li>niet te veel animaties</li>
+<li>doneren is erg belangrijk en moet opvallen</li>
+<li>spacing qua lettertypen klopt niet helemaal</li>
+</ul>
+<h2>vrij 11 okt</h2>
+<p>2.1 : signaleert verbeterpunten</p>
+<p>smashing
+masterdon
+youtube
+kevin paul
+performance now
+smashing magazine
+linkedin
+insta
+twitter
+slack
+reddit</p>
+<p>betekenis
+wat is het, onderbouwen
+dit is goeie bewijslast omdat
+leervraag</p>
+<h2>ma 14 okt</h2>
+<p>nieuwe headless cms
+je mag content kopieren
+bewijslast toevoegen
+presenteren onderzoek
+documenteren en communiceren
+heel veel frameworks
+zoveel dat mensen stress krijgen
+dat maakt frontend moeilijk
+factors for choosing a tech stack
+side generators
+gatsby</p>
+<h2>wo 16 okt</h2>
+<h3>directus talk</h3>
+<ul>
+<li>perfectionism</li>
+<li>tech stack selection</li>
+<li>database, framework, hosting provider, ui library</li>
+<li>choice comes from what you already know</li>
+<li>trade of between the best and what you know</li>
+<li>design systems</li>
+<li>performance vs maintainability</li>
+<li>by what degree? over what scale?</li>
+<li>cost, energy</li>
+<li>tailwind is a ui css utility library</li>
+<li>take a bit more time now, way less time later on maintainance</li>
+<li>velocity vs flexibility</li>
+<li>innovation vs reliabilty</li>
+<li>business talk</li>
+<li>trade off</li>
+<li>ai :(
+<ul>
+<li>ethics,</li>
+<li>theft,</li>
+<li>everyone is doing it,</li>
+<li>cost,</li>
+<li>environmental impact,</li>
+<li>acuracy</li>
+</ul>
+</li>
+<li>ai in directus, query data, what if you get it wrong, responsibility</li>
+<li>directus ai approach was very catious</li>
+<li>distraction</li>
+<li>fast, good or cheap, the iron triangle</li>
+<li>weighted decision matrix</li>
+<li>using directus
+<ul>
+<li>cms</li>
+<li>not the best cms</li>
+<li>good speed</li>
+<li>high quality</li>
+<li>directus is never what people are looking for</li>
+<li>directus is flexible</li>
+<li>used in many ways</li>
+<li>storyblock, cms is very ui pretty</li>
+<li>directus is very data driven</li>
+</ul>
+</li>
+<li>youre going to make bad deciosions, own them, make better decisions next time</li>
+<li>its part of learning, over you will be able to make better decisions</li>
+<li>root your decisions in user needs
+<ul>
+<li>developers are also a stakeholder, we need to maintain and build the code</li>
+<li>any impact that doesn't matter for end users, doesnt matter</li>
+<li>like what stack you use, doesnt matter for end users</li>
+</ul>
+</li>
+<li><strong>do you use poker planning? what tools do you use?</strong>
+<ul>
+<li>we estimate time at the beginning of a project, and plan and see if it is met</li>
+<li>we have different teams</li>
+</ul>
+</li>
+<li><strong>do you access how many code workers produce?</strong> no absolutely not
+<ul>
+<li>lines of code are not a product of productivity</li>
+<li>productivty ebbes and flowes and thats life, its more important to keep people happy</li>
+</ul>
+</li>
+<li>5 to 8 people in a team</li>
+<li>are they self governing? no there is a head of product</li>
+<li>we have a notion of a player coach</li>
+<li><strong>how does directus gather feedback?</strong>
+<ul>
+<li>from multiple places</li>
+<li>most of our users will never become customers, wich is unnusual</li>
+<li>community members are active in discord and github</li>
+<li>customers are also active in communicty</li>
+<li>users just use the product and arents really active</li>
+<li>audience</li>
+<li>if appropriate add issues into docs</li>
+<li>everyone is a customer</li>
+</ul>
+</li>
+<li>Imposter syndrome
+<ul>
+<li>library with learning collections</li>
+<li>many people feel imposter syndrome</li>
+<li>its an irrational feeling</li>
+<li>its ok not to know everything</li>
+<li>highly curated</li>
+</ul>
+</li>
+<li>directus tv
+<ul>
+<li>its a streaming platform</li>
+<li>directus academy</li>
+<li>it has all of the features</li>
+<li>watch all the episodes</li>
+<li>acces control</li>
+<li>flows</li>
+<li>github webhook for commit</li>
+<li>a web socket is a two way connection</li>
+</ul>
+</li>
+</ul>
+<h3>Triple talk</h3>
+<ul>
+<li>
+<p>shyanta vleugel</p>
+</li>
+<li>
+<p>tech lead</p>
+</li>
+<li>
+<p>cmd gestudeerd</p>
+</li>
+<li>
+<p>7 jaar triple</p>
+</li>
+<li>
+<p>web, smart tv, android, nos, design en backend</p>
+</li>
+<li>
+<p>hypersolid</p>
+</li>
+<li>
+<p>sfeer is belangrijk</p>
+</li>
+<li>
+<p>feestjes, funky friday, converenties</p>
+</li>
+<li>
+<p>het webteam</p>
+</li>
+<li>
+<p>angular, door naar react</p>
+</li>
+<li>
+<p>react native en smart tv</p>
+</li>
+<li>
+<p>3 teams, zelfde stack</p>
+</li>
+<li>
+<p>web werkt in react of svelte</p>
+</li>
+<li>
+<p>oud blijft react tenzij het opnieuw word gebouwd</p>
+</li>
+<li>
+<p>nieuw word svelte tenzij reacte native word gebruikt</p>
+</li>
+<li>
+<p>smart tv app is een web app maar draait op smart tv, daarom svelte omdat het licht is</p>
+</li>
+<li>
+<p>react native team, manier om iets te bouwen voor meerdere platform lagen</p>
+</li>
+<li>
+<p>way of working</p>
+</li>
+<li>
+<p>scrum</p>
+<ul>
+<li>daily standup</li>
+<li>refinements</li>
+<li>retrospective</li>
+<li>sprint review/planning</li>
+<li>techload en product owner rol</li>
+</ul>
+</li>
+<li>
+<p>JIRA = ticket management systeem, net als project board</p>
+</li>
+<li>
+<p>GIT code reviews</p>
+</li>
+<li>
+<p>conventional commits</p>
+</li>
+<li>
+<p>wat doet een tech lead?</p>
+<ul>
+<li>je zorgt ervoor dat de devs weten wat ze moeten doen</li>
+<li>dingen uitschetsen is heel belangrijk</li>
+</ul>
+</li>
+<li>
+<p>werken met react of svelte, html en scss en typescript</p>
+</li>
+<li>
+<p>wiki's, ted talks, nieuwe features talks, alles delen</p>
+</li>
+<li>
+<p>andere producten met andere uitdagingen</p>
+</li>
+<li>
+<p>verschillende api's</p>
+</li>
+<li>
+<p>waarom kies je tech stacks?</p>
+</li>
+<li>
+<p>eindproduct, moet het seo performance zijn? doe dan server side rendered</p>
+</li>
+<li>
+<p>eenmalige website? wens voor animaties?</p>
+</li>
+<li>
+<p>onderzoeken naar tech stacks</p>
+</li>
+<li>
+<p>kennis sessies zijn belangrijk</p>
+</li>
+<li>
+<p>kijken naar nieuwe dingen</p>
+</li>
+<li>
+<p>tijd vrijgemaakt om dingen te onderzoeken mits je een presentatie geeft</p>
+</li>
+<li>
+<p>tips:</p>
+<ul>
+<li>dont repeat yourself</li>
+<li>componenten gebruiken</li>
+<li>componenten zijn lego blokjes</li>
+<li>componenten zijn heilig, maar het framework staat er los van</li>
+</ul>
+</li>
+<li>
+<p>web components, importeren in je frameworks</p>
+</li>
+</ul>
+<h3>justus talk</h3>
+<ul>
+<li>proof of concept</li>
+<li>logica en argumentatie</li>
+<li>je kan een standpunt innemen</li>
+<li>user experience, developer experience, content-management experience</li>
+<li>maak een argumentatie schema</li>
+<li>meervoudige argumentatie</li>
+<li>werk het schema uit</li>
+<li>zondag 27 okt 23.59 portflow inleveren</li>
+</ul>
+<h2>Vrij 18 okt</h2>
+<h3>We love web Dion Pieters</h3>
+<ul>
+<li>portfolio</li>
+<li>e-commerce</li>
+<li>houdt je gewoon aan het design</li>
+<li>spotify, loui viton, squarespace</li>
+<li>wie gaat het designen? heb ik nog een oud portfolio? wat wil ik laten zien? wie gaat het bekijken? Hoeveel tijd moet ik eraan besteden?</li>
+<li>moet een developer kunnen designen en moet een designer kunnen developen? nee.</li>
+<li>geen limitaties</li>
+<li>te design georienteerd, paste niet bij hem</li>
+<li>beginnen met een opzet, eigen creativiteit eraan toevoegen</li>
+<li>overleggen wat hij wilt en wat zijn doelen zijn</li>
+<li>branding gemaakt, smiley, grote naam, felle kleuren</li>
+<li>moet ieder element op je site een vorm van animatie hebben? ja</li>
+<li>een website is juist interactief en stuurt je in een andere dimensie en moet losgaan</li>
+<li>laat zien wat je leuk vind, zodat je daar meer projecten van krijgt</li>
+<li>found.byspotify.com</li>
+<li>activetheory.net</li>
+<li>jij hebt zelf de kennis om een klant te overtuigen waarom je iets moet doen</li>
+<li>hoe houdbaar is je portfolio? wanneer moet je een nieuwe maken met nieuwe trends?
+<ul>
+<li>niet zo houdbaar, steeds veranderen</li>
+</ul>
+</li>
+<li>box sizing border box zorgt ervoor dat de padding aan de binnenkant van het element zit ipv buitenkant, zodat het element niet breder word</li>
+</ul>
+<h2>schakelprogramma</h2>
+<ul>
+<li>Francisca</li>
+<li>dit jaar anders</li>
+<li>profileringsblok kiezen</li>
+<li>4 blokken</li>
+<li>1 niet: tech</li>
+<li>ook nog een special</li>
+<li>blok 4 dagen per week</li>
+<li>1 dag special op woensdag</li>
+<li>keuzemodules</li>
+<li>meer dan 5</li>
+<li>marketing, 3d, kleine onderwerpen</li>
+<li>1 blok en 1 special kiezen</li>
+<li>aangepaste cmd programma, 2 en een half jaar</li>
+<li>1e half jaar 2 blokken met jaar 1 en 2 vakken, blok 1 jaar 1, blok 2 jaar 2</li>
+<li>interactie vakken blok 1</li>
+<li>blok 2 verder kijken dan scherm en web</li>
+<li>2e helft jaar verder met profilierings blokken</li>
+<li>jaar 2 semesters</li>
+<li>1e half thema semester</li>
+<li>minoren folder</li>
+<li>visual interface disign, information design, webdesign mag niet</li>
+<li>nieuwe tech, ai</li>
+<li>information design ook technisch</li>
+<li>service design, onderzoek en diensten</li>
+<li>2e half lange stage van 20 weken</li>
+<li>daarna onderzoek doen</li>
+<li>je kan ook later instromen in cmd, maar vragen examencomissie</li>
+<li>portfolio is belangrijk</li>
+<li>je mag wel een frontend stage doen</li>
+<li>veel tijd bezig met onderzoek, veel methodes oefenen, meer theorie zoals psychologie</li>
+<li>competenties, 4 ontwerp en 4 proffesionele</li>
+<li>onderzoek service design efteling</li>
+<li>1e jaar is pittig want je doet elk blok wat anders en in een andere klas en ander jaar</li>
+<li>de inschrijving is volgende week dinsdag om 8 uur ochtend, snel inschrijven</li>
+<li>ook op de inschrijf lijst staan</li>
+<li>maandag namen voor lijst</li>
+<li>academy attendance</li>
+</ul>
+<p><a href="../sprint13">vorige</a> <a href="../sprint15">volgende</a></p>
+
+    </main>
+    <footer>
+        <ul>
+            <li><a href="/i-love-web/">Home</a></li>
+            <li><a href="/i-love-web/Learning-Journal">Learning Journal</a></li>
+            <li><a href="/i-love-web/Projects">Projects</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

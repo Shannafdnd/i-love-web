@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Journal sprint 13</title>
+    <link rel="stylesheet" href="/i-love-web/bundle.css"><script type="module">
+        const themePicker = document.getElementById("theme-picker");
+        const tryThemes = document.getElementById("try-themes");
+        const toggleNav = document.getElementById("toggle-nav");
+        const header = document.getElementById("header");
+        
+        const theme = localStorage.getItem("theme");
+        if (theme) {
+            document.body.className = theme;
+            themePicker.value = theme;
+            tryThemes.remove();
+        }
+
+        themePicker.addEventListener("change", () => {
+            document.body.className = themePicker.value;
+            localStorage.setItem("theme", themePicker.value);
+            tryThemes.remove();
+        })
+
+        toggleNav.addEventListener("click", () => {
+            header.classList.toggle("open");
+        })
+    </script>
+</head>
+<body class="papyrus">
+    <header id="header">
+        <button id="toggle-nav">
+            <svg width="36" height="28" viewBox="0 0 18 14">
+                <path fill="#ffffff" d="M 1 0 h 16 a 1 1 0 0 1 0 2 h -16 a 1 1 0 0 1 0 -2 Z" />
+                <path fill="#ffffff" d="M 1 6 h 16 a 1 1 0 0 1 0 2 h -16 a 1 1 0 0 1 0 -2 Z" />
+                <path fill="#ffffff" d="M 1 12 h 16 a 1 1 0 0 1 0 2 h -16 a 1 1 0 0 1 0 -2 Z" />
+            </svg>
+            <!-- <img src="/assets/hamburger-menu.svg" alt="menu" width="40" height="40"> -->
+        </button>
+        <nav>
+            <ul>
+                <li>
+                    <select id="theme-picker">
+                        <option value="fall">Fall</option>
+                        <option value="evening">Evening</option>
+                        <option value="midnight">Midnight</option>
+                    </select>
+                </li>
+                <li><a href="/i-love-web/">Home</a></li>
+                <li><a href="/i-love-web/Learning-Journal">Learning Journal</a></li>
+                <li><a href="/i-love-web/Projects">Projects</a></li>
+            </ul>
+        </nav>
+        <div id="try-themes">
+            <p>Also try other themes</p>
+            <img src="/i-love-web/assets/arrow.png" alt="arrow" width="30" height="30">
+        </div>
+    </header>
+    <main>
+        <p><a href="../sprint14">volgende</a></p>
+<h1>Sprint 13</h1>
+<h2>Maandag 2 sept</h2>
+<p>Ik heb geleerd over het jaar programma, dat ik sveltekit moet gaan gebruiken, een learning journal moet gaan gebruiken en een mentor moet worden.</p>
+<h2>Dinsdag 3 sept</h2>
+<p>Ik heb een svelte tutorial gevolgd en met docker mijn eigen directus server gehost, zodat ik de tutorial goed kon volgen, want je moest een admin zijn van een directus server om het te kunnen volgen. Ik heb ook een lofi schets gemaakt voor de squadpage.</p>
+<h2>Woensdag 4 sept</h2>
+<p>Ik heb geleerd hoe je sveltekit kan opzetten, hoe je routes kan maken door mapjes aan te maken.</p>
+<h2>Donderdag 5 sept</h2>
+<p>Ik heb gewerkt aan mijn taak in de squadpage, filters maken. Ik heb een</p>
+<h2>Vrijdag 6 sept</h2>
+<p>Ik heb een code review gedaan op de visitekaartjes van eerstejaars, en van de squadpage van andere groepjes.</p>
+<h2>Maandag: 9 sept</h2>
+<p>Ik heb een Figma workshop gevolgd. Ik heb geleerd hoe je makkelijk groups maakt en wat handige shortcuts zijn om snel een vierkant of cirkel te maken.</p>
+<h2>maandag 16 sept</h2>
+<p>een epic is een groter stuk werk dat is opgesplitst. daarna verdeel je het is user stories, en daarna in taken. Je moet voorbeelden hebben en redenen voor je ontwerp.
+Planning poker: poker alle taken in de planning.
+MoSCow: Must have, should have, could have, want to have but can't have this timeround.</p>
+<h2>woensdag 18 sept</h2>
+<h3>wrap-up: over hoe je je projecten oplevert</h3>
+<ul>
+<li>code conventies</li>
+<li>kampvuur sessie</li>
+<li>live zetten</li>
+</ul>
+<p>**Refactored code:</p>
+<ul>
+<li>semantische code</li>
+<li>nette code</li>
+<li>geen console.log</li>
+<li>goeie tabs</li>
+<li>geen commented code</li>
+</ul>
+<p>**Readme:</p>
+<ul>
+<li>kenmerken</li>
+<li>live link</li>
+<li>screenshots</li>
+<li>instructies</li>
+<li>instalatiehandleiding</li>
+<li>CMS uitleg</li>
+<li>huisstijl bijdragen</li>
+<li>bronnen</li>
+<li>badges met gebruikte technologie</li>
+</ul>
+<p>**live zetten:</p>
+<ul>
+<li>vercel</li>
+<li>github pages</li>
+<li>netlify</li>
+<li>onrender</li>
+</ul>
+<p>3.1
+1.1</p>
+<h2>Maandag 23 sept</h2>
+<p>Jamstack : js api en markup
+Headless CMS: bijv directus
+Mentor van 1H</p>
+<h2>di 24 sept</h2>
+<p>wat is de opdracht?
+maak de website beter en ontwerp nieuwe sites, fluid design, toegankelijk</p>
+<p>opdracht 1: maak het design na, als je tijd over hebt, design zelf nog meer</p>
+<p>platvorm voor jonge journalisten om zich te ontwikkelen
+je kan schrijven en ervaring opdoen</p>
+<p>mobiel werkt niet goed</p>
+<h2>vrijday 27 sept</h2>
+<p>FEEDBACK:</p>
+<ul>
+<li>testen meenemen in een pull request</li>
+<li>lisa, jason en yu jing hebben een checklist gevonden bij pull-requests</li>
+<li>iteraties is verwarrend en rommelig, die moeten weg</li>
+<li>dlc labels mogen ook weg</li>
+<li>testen moet per component</li>
+<li>per component fluid design</li>
+<li>opschonen</li>
+<li>1 taal gebruiken</li>
+</ul>
+<p><a href="../sprint14">volgende</a></p>
+
+    </main>
+    <footer>
+        <ul>
+            <li><a href="/i-love-web/">Home</a></li>
+            <li><a href="/i-love-web/Learning-Journal">Learning Journal</a></li>
+            <li><a href="/i-love-web/Projects">Projects</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

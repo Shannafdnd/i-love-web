@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Myfont';
+    src: url('/assets/Myfont-Regular.ttf');
+}
+
+main p, main li, main h2, main h3 {
+    font-family: Myfont;
+}
