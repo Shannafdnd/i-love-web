@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "npx @11ty/eleventy --serve"
+    "serve": "npx @11ty/eleventy --serve",
+    "build": "env NODE_ENV=production npx eleventy --pathprefix 'i-love-web'"
   },
   "keywords": [],
   "author": "",
